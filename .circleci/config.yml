@@ -76,7 +76,7 @@ jobs:
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-network" \
               --region ${AWS_DEFAULT_REGION} \
-              --parameter-overrides file://cloudformation/network-parameters.json
+              --parameter-overrides file://cloudformation/network-parameter.json
       - run:
           name: Ensure EKS Cluster exists
           command: |
@@ -85,7 +85,7 @@ jobs:
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-cluster" \
               --region ${AWS_DEFAULT_REGION} \
-              --parameter-overrides file://cloudformation/cluster-parameters.json \
+              --parameter-overrides file://cloudformation/cluster-parameter.json \
               --capabilities CAPABILITY_NAMED_IAM
           no_output_timeout: 15m
       - run:
@@ -96,27 +96,27 @@ jobs:
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-nodegroup" \
               --region ${AWS_DEFAULT_REGION} \
-              --parameter-overrides file://cloudformation/nodegroup-parameters.json \
+              --parameter-overrides file://cloudformation/nodegroup-parameter.json \
               --capabilities CAPABILITY_NAMED_IAM
       - run:
-          name: Ensure management instances exists
+          name: Ensure controller instances exists
           command: |
             aws cloudformation deploy \
-              --template-file cloudformation/management.yml \
+              --template-file cloudformation/controller.yml \
               --tags project=${ENVIRONMENT_NAME}-project \
-              --stack-name "${ENVIRONMENT_NAME}-eks-management" \
+              --stack-name "${ENVIRONMENT_NAME}-eks-controller" \
               --region ${AWS_DEFAULT_REGION} \
-              --parameter-overrides file://cloudformation/management-parameters.json \
+              --parameter-overrides file://cloudformation/controller-parameter.json \
               --output text >> ~/checkIfDeployed.txt
             cat ~/checkIfDeployed.txt
       - run:
-          name: Extract the IPs of the management instances for Ansible
+          name: Extract the IPs of the controller instances for Ansible
           command: |
-            echo [management] > ~/inventory.txt
+            echo [controller] > ~/inventory.txt
             aws ec2 describe-instances \
               --region "${AWS_DEFAULT_REGION}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters "Name=tag:Name,Values=${ENVIRONMENT_NAME}-management*" \
+              --filters "Name=tag:Name,Values=${ENVIRONMENT_NAME}-controller*" \
               --output text >> ~/inventory.txt
             cat ~/inventory.txt
       - persist_to_workspace:
@@ -145,7 +145,7 @@ jobs:
             if grep -q "No changes to deploy" ~/checkIfDeployed.txt
               then
                 cat ~/inventory.txt
-                echo "Our management instances are already configured."
+                echo "Our controller instances are already configured."
               else
                 cat ~/inventory.txt
                 cd ansible
@@ -172,7 +172,7 @@ jobs:
             if grep -q "No changes to deploy" ~/checkIfDeployed.txt
               then
                 cat ~/inventory.txt
-                echo "Our management instances are already configured."
+                echo "Our controller instances are already configured."
               else
                 cat ~/inventory.txt
                 cd ansible
@@ -184,7 +184,7 @@ jobs:
             if grep -q "No changes to deploy" ~/checkIfDeployed.txt
               then
                 cat ~/inventory.txt
-                echo "Our management instances are already configured."
+                echo "Our controller instances are already configured."
               else
                 cat ~/inventory.txt
                 echo "Wait 60 seconds..."
