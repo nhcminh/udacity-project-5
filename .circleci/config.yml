@@ -77,7 +77,7 @@ jobs:
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-network" \
               --region ${AWS_DEFAULT_REGION} \
-              --parameter-overrides file://network-parameters.json
+              --parameter-overrides file://network-parameter.json
       - run:
           name: Ensure EKS Cluster exists
           command: |
@@ -86,7 +86,7 @@ jobs:
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-cluster" \
               --region ${AWS_DEFAULT_REGION} \
-              --parameter-overrides file://cluster-parameters.json \
+              --parameter-overrides file://cluster-parameter.json \
               --capabilities CAPABILITY_NAMED_IAM
           no_output_timeout: 15m
       - run:
@@ -97,7 +97,7 @@ jobs:
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-nodegroup" \
               --region ${AWS_DEFAULT_REGION} \
-              --parameter-overrides file://nodegroup-parameters.json \
+              --parameter-overrides file://nodegroup-parameter.json \
               --capabilities CAPABILITY_NAMED_IAM
       - run:
           name: Ensure controller instances exists
@@ -107,7 +107,7 @@ jobs:
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-controller" \
               --region ${AWS_DEFAULT_REGION} \
-              --parameter-overrides file://controller-parameters.json \
+              --parameter-overrides file://controller-parameter.json \
               --output text >> ~/checkIfDeployed.txt
             cat ~/checkIfDeployed.txt
       - run:
