@@ -71,13 +71,12 @@ jobs:
       - run:
           name: Ensure EKS network exists
           command: |
-            cd cloudformation
             aws cloudformation deploy \
               --template-file cloudformation/network.yml \
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-network" \
               --region ${AWS_DEFAULT_REGION} \
-              --parameter-overrides file://network-parameter.json
+              --parameter-overrides file://cloudformation/network-parameter.json
       - run:
           name: Ensure EKS Cluster exists
           command: |
@@ -86,7 +85,7 @@ jobs:
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-cluster" \
               --region ${AWS_DEFAULT_REGION} \
-              --parameter-overrides file://cluster-parameter.json \
+              --parameter-overrides file://cloudformation/cluster-parameter.json \
               --capabilities CAPABILITY_NAMED_IAM
           no_output_timeout: 15m
       - run:
@@ -97,7 +96,7 @@ jobs:
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-nodegroup" \
               --region ${AWS_DEFAULT_REGION} \
-              --parameter-overrides file://nodegroup-parameter.json \
+              --parameter-overrides file://cloudformation/nodegroup-parameter.json \
               --capabilities CAPABILITY_NAMED_IAM
       - run:
           name: Ensure controller instances exists
@@ -107,7 +106,7 @@ jobs:
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-controller" \
               --region ${AWS_DEFAULT_REGION} \
-              --parameter-overrides file://controller-parameter.json \
+              --parameter-overrides file://cloudformation/controller-parameter.json \
               --output text >> ~/checkIfDeployed.txt
             cat ~/checkIfDeployed.txt
       - run:
