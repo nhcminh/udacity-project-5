@@ -71,6 +71,7 @@ jobs:
       - run:
           name: Ensure EKS network exists
           command: |
+            ls
             aws cloudformation deploy \
               --template-file cloudformation/network.yml \
               --tags project=${ENVIRONMENT_NAME}-project \
