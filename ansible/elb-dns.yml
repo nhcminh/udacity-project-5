@@ -1,5 +1,5 @@
 - name: "Save LoadBalancer's DNS name locally"
-  hosts: controller[0]
+  hosts: controller
   user: ubuntu
   gather_facts: false
   become: yes
