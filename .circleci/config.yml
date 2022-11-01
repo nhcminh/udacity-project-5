@@ -149,7 +149,7 @@ jobs:
               else
                 cat ~/inventory.txt
                 cd ansible
-                ansible-playbook -i ~/inventory.txt config-server.yml
+                ansible-playbook -i ~/inventory.txt config-sever.yml
               fi
 
   configure-cluster:
