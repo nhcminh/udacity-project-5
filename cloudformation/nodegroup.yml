@@ -14,7 +14,7 @@ Parameters:
 
   MaxSize:
     Description: Maximum number of web application servers
-    Default: 6
+    Default: 4
     Type: String
 
   DesiredSize:
