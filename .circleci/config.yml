@@ -127,14 +127,9 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: cimg/base:stable
     steps:
       - checkout
-      - add_ssh_keys:
-          fingerprints:
-            - "d9:4d:e2:da:09:cd:e3:b5:aa:05:4a:e1:bc:ab:2c:44:a7:63:eb:4e"
-      - attach_workspace:
-          at: ~/
       - run:
           name: Install dependencies
           command: |
@@ -142,6 +137,11 @@ jobs:
             sudo apt install software-properties-common -y
             sudo add-apt-repository --yes --update ppa:ansible/ansible
             sudo apt install ansible -y
+      - add_ssh_keys:
+          fingerprints:
+            - "d9:4d:e2:da:09:cd:e3:b5:aa:05:4a:e1:bc:ab:2c:44:a7:63:eb:4e"
+      - attach_workspace:
+          at: ~/
       - run:
           name: Configure server
           command: |
