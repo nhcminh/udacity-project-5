@@ -4,7 +4,7 @@ Description: >
 Parameters:
   EnvironmentName:
     Description: An Environment name that will be prefixed to resources
-    Default: capstone-project
+    Default: my-capstone-project
     Type: String
 
   MinSize:
@@ -14,7 +14,7 @@ Parameters:
 
   MaxSize:
     Description: Maximum number of web application servers
-    Default: 4
+    Default: 2
     Type: String
 
   DesiredSize:
