@@ -151,7 +151,7 @@ jobs:
             ssh-add capstone.pem 
             cd ..
             cd ansible
-            ansible-playbook -i ~/inventory.txt -u ubuntu --private-key ./.ssh/capstone.pem config-sever.yml -vvv
+            ansible-playbook -i ~/inventory.txt -u ubuntu --private-key ./.ssh/capstone.pem config-sever.yml
 
   configure-cluster:
     docker:
@@ -194,8 +194,11 @@ jobs:
           name: Display the LoadBalancer's DNS name
           command: |
             cat ~/inventory.txt
+            chmod 400 ./.ssh/capstone.pem
+            eval `ssh-agent`
+            ssh-add ./.ssh/capstone.pem 
             cd ansible
-            ansible-playbook -i ~/inventory.txt elb-dns.yml
+            ansible-playbook -i ~/inventory.txt -u ubuntu --private-key ./.ssh/capstone.pem elb-dns.yml
             cat > ~/elb_dns.txt
             cat ~/elb_dns.txt
       - persist_to_workspace:
