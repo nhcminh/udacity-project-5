@@ -142,15 +142,9 @@ jobs:
       - run:
           name: Configure server
           command: |
-            if grep -q "No changes to deploy" ~/checkIfDeployed.txt
-              then
-                cat ~/inventory.txt
-                echo "Our controller instances are already configured."
-              else
-                cat ~/inventory.txt
-                cd ansible
-                ansible-playbook -i ~/inventory.txt config-sever.yml
-              fi
+            cat ~/inventory.txt
+            cd ansible
+            ansible-playbook -i ~/inventory.txt config-sever.yml
 
   configure-cluster:
     docker:
