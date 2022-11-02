@@ -165,7 +165,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apt-get install curl
+            python3 install curl
             curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
             python3 get-pip.py --user
             python3 -m pip install --user ansible
