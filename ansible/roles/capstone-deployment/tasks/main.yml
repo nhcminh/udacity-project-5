@@ -1,9 +1,9 @@
 - name: Copy deployment configuration
   copy:
-    src: "{{ ENVIRONMENT_NAME }}-deployment.yml"
+    src: "capstone-project-deployment.yml"
     dest: $HOME
 
 - name: Apply deployment configuration
-  shell: "./bin/kubectl apply -f {{ ENVIRONMENT_NAME }}-deployment.yml"
+  shell: "./bin/kubectl apply -f capstone-project-deployment.yml"
   args:
     chdir: $HOME
