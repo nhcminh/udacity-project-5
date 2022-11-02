@@ -145,9 +145,11 @@ jobs:
           name: Configure server
           command: |
             cat ~/inventory.txt
+            cd .ssh
+            eval `ssh-agent`
+            ssh-add capstone.pem 
             cd ansible
-            ansible all --list-hosts
-            ansible-playbook -i ~/inventory.txt -vvv config-sever.yml
+            ansible-playbook -i ~/inventory.txt -vvv -u --private-key config-sever.yml
 
   configure-cluster:
     docker:
