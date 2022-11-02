@@ -147,6 +147,7 @@ jobs:
             cat ~/inventory.txt
             cd .ssh
             eval `ssh-agent`
+            chmod 400 capstone.pem
             ssh-add capstone.pem 
             cd ansible
             ansible-playbook -i ~/inventory.txt -vvv -u --private-key config-sever.yml
