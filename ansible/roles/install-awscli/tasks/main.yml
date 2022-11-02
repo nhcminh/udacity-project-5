@@ -4,7 +4,9 @@
     chdir: $HOME
 
 - name: "Unzip the AWS CLI Archive"
-  shell: unzip awscliv2.zip
+  shell: |
+    ls
+    unzip awscliv2.zip
   args:
     chdir: $HOME
 
