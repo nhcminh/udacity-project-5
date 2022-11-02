@@ -144,7 +144,7 @@ jobs:
           command: |
             cat ~/inventory.txt
             cd ansible
-            ansible all -m ping
+            ansible all --list-hosts
             ansible-playbook -i ~/inventory.txt -vvv config-sever.yml
 
   configure-cluster:
