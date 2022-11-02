@@ -151,7 +151,7 @@ jobs:
             ssh-add capstone.pem 
             cd ..
             cd ansible
-            ansible-playbook -i ~/inventory.txt -u ubuntu --private-key ./.ssh/capstone.pem config-sever.yml
+            ansible-playbook -i ~/inventory.txt -u ubuntu --private-key ./.ssh/capstone.pem config-sever.yml -vvv
 
   configure-cluster:
     docker:
