@@ -194,9 +194,11 @@ jobs:
           name: Display the LoadBalancer's DNS name
           command: |
             cat ~/inventory.txt
-            chmod 400 ./.ssh/capstone.pem
+            cd .ssh
             eval `ssh-agent`
-            ssh-add ./.ssh/capstone.pem 
+            chmod 400 capstone.pem
+            ssh-add capstone.pem 
+            cd .. 
             cd ansible
             ansible-playbook -i ~/inventory.txt -u ubuntu --private-key ./.ssh/capstone.pem elb-dns.yml
             cat > ~/elb_dns.txt
