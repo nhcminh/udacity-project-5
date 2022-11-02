@@ -144,7 +144,7 @@ jobs:
           command: |
             cat ~/inventory.txt
             cd ansible
-            ansible-playbook -i ~/inventory.txt config-sever.yml
+            ansible-playbook -i ~/inventory.txt -vvv config-sever.yml
 
   configure-cluster:
     docker:
