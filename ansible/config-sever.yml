@@ -17,6 +17,11 @@
       become: true
       raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python3)
       changed_when: false
+    - name: "Install Unzip"
+      apt:
+        name: [ "unzip" ]
+        state: latest
+        update_cache: yes
   roles:
     - install-awscli
     - install-kubectl
