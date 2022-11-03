@@ -203,7 +203,7 @@ jobs:
             ssh-add capstone.pem 
             cd .. 
             cd ansible
-            ansible-playbook -i ~/inventory.txt -u ubuntu --private-key ./.ssh/capstone.pem elb-dns.yml
+            ansible-playbook -i ~/inventory.txt -u ubuntu --private-key ./.ssh/capstone.pem elb-dns.yml -vvv
             cat > ~/elb_dns.txt
             cat ~/elb_dns.txt
       - persist_to_workspace:
