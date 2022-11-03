@@ -5,6 +5,9 @@
   become: yes
   vars:
     ENVIRONMENT_NAME: "{{ lookup('env', 'ENVIRONMENT_NAME') }}"
+  ansible.builtin.debug:
+    msg:
+    - "Provisioning based on ENVIRONMENT_NAME which is: {{ lookup('ansible.builtin.env', 'ENVIRONMENT_NAME') }}"
   tasks:
     - name: Get the LoadBalancer's DNS name
       shell: "./bin/kubectl get svc {{ ENVIRONMENT_NAME }}-service"
