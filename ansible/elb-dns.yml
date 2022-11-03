@@ -5,10 +5,10 @@
   become: yes
   vars:
     ENVIRONMENT_NAME: "{{ lookup('env', 'ENVIRONMENT_NAME') }}"
-  ansible.builtin.debug:
-    msg:
-    - "Provisioning based on ENVIRONMENT_NAME which is: {{ lookup('ansible.builtin.env', 'ENVIRONMENT_NAME') }}"
   tasks:
+    - name: Print the gateway for each host when defined
+      ansible.builtin.debug:
+        msg: "Provisioning based on ENVIRONMENT_NAME which is: {{ lookup('env', 'ENVIRONMENT_NAME') }}"
     - name: Get the LoadBalancer's DNS name
       shell: "./bin/kubectl get svc {{ ENVIRONMENT_NAME }}-service"
       register: elb_dns
