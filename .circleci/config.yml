@@ -167,6 +167,7 @@ jobs:
           command: |
             python3 -m pip install --upgrade pip
             python3 -m pip install --user ansible
+            apt-get install ansible
       - run:
           name: Configure server
           command: |
