@@ -172,15 +172,13 @@ jobs:
       - run:
           name: Configure server
           command: |
-            if grep -q "No changes to deploy" ~/checkIfDeployed.txt
-              then
-                cat ~/inventory.txt
-                echo "Our controller instances are already configured."
-              else
-                cat ~/inventory.txt
-                cd ansible
-                ansible-playbook -i ~/inventory.txt configure-cluster.yml
-              fi
+            cd .ssh
+            eval `ssh-agent`
+            chmod 400 capstone.pem
+            ssh-add capstone.pem 
+            cd ..
+            cd ansible
+            ansible-playbook -i ~/inventory.txt configure-cluster.yml
       - run:
           name: Wait for LoadBalancer's domain to become reachable
           command: |
@@ -201,7 +199,7 @@ jobs:
             eval `ssh-agent`
             chmod 400 capstone.pem
             ssh-add capstone.pem 
-            cd .. 
+            cd ..
             cd ansible
             ansible-playbook -i ~/inventory.txt -u ubuntu --private-key ./.ssh/capstone.pem elb-dns.yml -vvv
             cat > ~/elb_dns.txt
