@@ -144,14 +144,20 @@ jobs:
       - run:
           name: Configure server
           command: |
-            cat ~/inventory.txt
-            cd .ssh
-            eval `ssh-agent`
-            chmod 400 capstone.pem
-            ssh-add capstone.pem 
-            cd ..
-            cd ansible
-            ansible-playbook -i ~/inventory.txt -u ubuntu --private-key ./.ssh/capstone.pem config-sever.yml
+            if grep -q "No changes to deploy" ~/checkIfDeployed.txt
+                then
+                  cat ~/inventory.txt
+                  echo "Our management instances are already configured."
+                else
+                  cat ~/inventory.txt
+                  cd .ssh
+                  eval `ssh-agent`
+                  chmod 400 capstone.pem
+                  ssh-add capstone.pem 
+                  cd ..
+                  cd ansible
+                  ansible-playbook -i ~/inventory.txt -u ubuntu --private-key ./.ssh/capstone.pem config-sever.yml -vvv
+                fi
 
   configure-cluster:
     docker:
@@ -172,13 +178,19 @@ jobs:
       - run:
           name: Configure server
           command: |
-            cd .ssh
-            eval `ssh-agent`
-            chmod 400 capstone.pem
-            ssh-add capstone.pem 
-            cd ..
-            cd ansible
-            ansible-playbook -i ~/inventory.txt configure-cluster.yml
+            if grep -q "No changes to deploy" ~/checkIfDeployed.txt
+              then
+                cat ~/inventory.txt
+                echo "Our management instances are already configured."
+              else
+                cd .ssh
+                eval `ssh-agent`
+                chmod 400 capstone.pem
+                ssh-add capstone.pem 
+                cd ..
+                cd ansible
+                ansible-playbook -i ~/inventory.txt configure-cluster.yml -vvv
+              fi
       - run:
           name: Wait for LoadBalancer's domain to become reachable
           command: |
