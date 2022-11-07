@@ -9,6 +9,6 @@
     chdir: $HOME
 
 - name: "Install the AWS CLI"
-  shell: ~/local/bin/awscliv2 --install
+  shell: ./aws/install
   args:
     chdir: $HOME
