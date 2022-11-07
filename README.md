@@ -2,7 +2,7 @@
 
 This project represents the successful completion of the last final Capstone project and the Cloud DevOps Engineer Nanodegree at Udacity.
 - Github: https://github.com/nhcminh/udacity-project-5
-- Docker: https://hub.docker.com/repository/registry-1.docker.io/minhnhc/capstone-project/
+- Docker: https://hub.docker.com/r/minhnhc/capstone-project
 - CircleCI: [![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://circleci.com/gh/nhcminh/udacity-project-5)
 ## What did I learn?
 
