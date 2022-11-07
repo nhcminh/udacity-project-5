@@ -4,11 +4,11 @@
     chdir: $HOME
 
 - name: "Unzip the AWS CLI Archive"
-  shell: python3 -m pip install awscliv2
-  # args:
-  #   chdir: $HOME
+  shell: unzip awscliv2.zip
+  args:
+    chdir: $HOME
 
 - name: "Install the AWS CLI"
   shell: ~/.local/bin/awscliv2 --install
-  # args:
-  #   chdir: $HOME
+  args:
+    chdir: $HOME
