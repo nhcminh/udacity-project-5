@@ -1,7 +1,8 @@
 # Cloud DevOps Engineer Capstone Project
 
 This project represents the successful completion of the last final Capstone project and the Cloud DevOps Engineer Nanodegree at Udacity.
-
+Github:
+Docker: https://hub.docker.com/repository/registry-1.docker.io/minhnhc/capstone-project/
 ## What did I learn?
 
 In this project, I applied the skills and knowledge I developed throughout the Cloud DevOps Nanodegree program. These include:
@@ -53,6 +54,10 @@ This process makes sure that the code quality is always as good as possible.
 #### This is the output when the step passes:
 
 ![Linting step fail](./screenshots/lint-success.png)
+
+## Upload Docker Image After Successful Build
+
+![Upload Docker](./screenshots/docker-repo.png)
 
 ## Access the Application
 
