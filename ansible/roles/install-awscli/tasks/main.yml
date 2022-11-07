@@ -1,6 +1,6 @@
 - name: "Install The AWS CLI"
   unarchive: 
-    src: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
     dest: /tmp
     remote_src: yes
   # args:
