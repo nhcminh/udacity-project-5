@@ -30,7 +30,7 @@ The CloudFormation Deployment can be broken down into four Parts:
 ![CloudFormation](./screenshots/cloud-formation-stack.png)
 
 #### List of deployed Instances:
-![Show Instances](./screenshots/ec_instances.png)
+![Show Instances](./screenshots/ec2_instances.png)
 
 ## CircleCi - CI/CD Pipelines
 
