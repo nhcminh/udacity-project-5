@@ -19,10 +19,14 @@
 
     - name: Get deployment
       shell: "./bin/kubectl get deployments"
+      args:
+        chdir: $HOME
       debug:
         msg: "{{ execute_node.stdout_lines }}"
 
     - name: Get service
       shell: "./bin/kubectl get services"
+      args:
+        chdir: $HOME
       debug:
         msg: "{{ execute_node.stdout_lines }}"
